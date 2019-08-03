@@ -1,0 +1,27 @@
+{
+  "name": "frugalr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "tsc --project ./functions && concurrently --kill-others 'firebase serve' 'tsc --project ./functions --watch'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/poop-monkeys/frugalr.git"
+  },
+  "keywords": [
+    "frugalr"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/poop-monkeys/frugalr/issues"
+  },
+  "homepage": "https://github.com/poop-monkeys/frugalr#readme",
+  "devDependencies": {
+    "concurrently": "^4.1.1",
+    "typescript": "^3.5.3"
+  }
+}
