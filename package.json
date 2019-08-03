@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "tsc --project ./functions && concurrently --kill-others 'firebase serve' 'tsc --project ./functions --watch'"
+    "serve": "tsc --project ./functions && concurrently --kill-others \"firebase serve\" \"tsc --project ./functions --watch\"",
+    "firebase": "tsc --project ./functions && firebase serve"
   },
   "repository": {
     "type": "git",
