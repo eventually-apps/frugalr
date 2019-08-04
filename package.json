@@ -5,8 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "tsc --project ./functions && concurrently --kill-others \"firebase serve\" \"tsc --project ./functions --watch\"",
-    "firebase": "tsc --project ./functions && firebase serve"
+    "serve": "tsc --project ./functions && rm -rf ./public/* && concurrently --kill-others \"firebase serve\" \"tsc --project ./functions --watch\" \"cd frontend && ./node_modules/.bin/vue-cli-service build --no-clean --dest ../public --watch\" \"sleep 15 && browser-sync start --proxy 'localhost:5000' --files 'public/*'\"",
+    "compile:firebase": "tsc --project ./functions",
+    "clean": "@powershell -NoProfile -ExecutionPolicy Unrestricted -Command Remove-Item -Path .\\public\\* -Recurse",
+    "watch": "tsc --project ./functions && concurrently --kill-others \"firebase serve\" \"tsc --project ./functions --watch\"",
+    "serve-vue": "\"cd frontend ./node_modules/.bin/vue-cli-service build --no-clean --dest ../public --watch\" \"sleep 15 && browser-sync start --proxy 'localhost:5000' --files 'public/*'\""
   },
   "repository": {
     "type": "git",
@@ -22,6 +25,7 @@
   },
   "homepage": "https://github.com/poop-monkeys/frugalr#readme",
   "devDependencies": {
+    "browser-sync": "^2.26.7",
     "concurrently": "^4.1.1",
     "typescript": "^3.5.3"
   },
