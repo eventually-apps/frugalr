@@ -12,8 +12,6 @@ export default class App extends Vue {}
 
 
 <style lang="scss">
-@import 'node_modules/bootstrap/scss/bootstrap';
-@import 'node_modules/bootstrap-vue/src/index.scss';
 
 html, body {
   background: linear-gradient(#1f1e1e, #725c7a);
