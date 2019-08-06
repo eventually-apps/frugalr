@@ -16,12 +16,12 @@ export default new Router({
     {
       path: '/create',
       name: 'create',
-      component: () => import('../views/EditTemplate.vue'),
+      component: () => import('@/views/EditTemplate.vue'),
     },
     {
       path: '/confirmation',
       name: 'confirmation',
-      component: () => import('../views/ConfirmationSend.vue'),
+      component: () => import('@/views/ConfirmationSend.vue'),
     },
   ],
 });
