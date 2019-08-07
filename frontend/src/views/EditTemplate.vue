@@ -11,40 +11,52 @@
                     </ul>             
                     <div class="panel-group" id="accordion">
                         <div class="card">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Collapsible Group 1</a>
+                            <div class="card-header">
+                                <h4 class="mb-0">
+                                    <button class="btn btn-link" type="button" data-toggle="collapse"  data-target="#collapse1">Group 1</button>
                                 </h4>
                             </div>
-                            <div id="collapse1" class="panel-collapse collapse in">
-                                <div class="panel-body">
-                                    Blah
+                            <div id="collapse1" class="collapse" data-parent="#accordion">
+                                <div class="card-body">
+                                    Blahsdfsdfsdfs fsdfsdfs
                                 </div>
                             </div>
-                        </div>
+                        </div> <!-- End 1 -->
                         <div class="card">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Collapsible Group 2</a>
+                            <div class="card-header">
+                                <h4 class="mb-0">
+                                    <button  class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse2">Group 2</button>
                                 </h4>
                             </div>
-                            <div id="collapse2" class="panel-collapse collapse">
-                                <div class="panel-body">
+                            <div id="collapse2" class="collapse" data-parent="#accordion">
+                                <div class="card-body">
                                     Blah
                                 </div>
                             </div>
-                        </div>
+                        </div> <!-- End 2 -->
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="mb-0">
+                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse3">Group 3</button>
+                                </div>
+                            </div>
+                            <div id="collapse3" class="collapse" data-parent="#accordion">
+                                <div class="card-body">
+                                    Blah
+                                </div>
+                            </div>
+                        </div> <!-- End 3 -->
                     </div>           
                 </div> <!--End Accordion -->
                 <div class="submit-area">                  
-                    <button v-on:click="cancelModal()" type="button" class="btn btn-outline-danger btn-lg">Cancel</button>                    
-                    <button type="button" class="btn btn-outline-success btn-lg">Finish</button>  
+                    <button v-on:click="cancelModal()" type="button" class="btn btn-outline-danger btn-lg btn-finish">Cancel</button>                    
+                    <button type="button" class="btn btn-outline-success btn-lg btn-finish">Finish</button>  
                 </div>
-            </nav>
-        </div>
-        <div class="content">
-            
-        </div>     
+            </nav> <!-- Sidebar End -->
+            <div class="content"> <!-- Form Builder Start -->
+
+            </div>  <!-- End Form Area -->
+        </div>        
     </div>
 </template>
 
@@ -62,14 +74,37 @@ export default class EditTemplate extends Vue {
 
 
 <style lang="scss">
-.btn{
-    margin: 10px;
+
+.content{
+    display: flex;
+    margin: 10vh;
+    width: 100vw;
+    flex: 0 1 auto;
+    background-color: rgba(#dacfcf, .3);
+    border: 2px solid#363636
+}
+
+
+.btn-link{
+    color:#fff;
+    text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
+}
+
+.btn:hover {
+    color: #383838;
+    text-decoration: none;
+}
+
+.btn-link:active{
+    text-decoration: none;
 }
 
 .card{
-    max-height: 100px !important;
-    background: #474747;
+    background: #635a64;
     //box-shadow: inset 0 0 5rem rgba(0, 0, 0, .2);
+}
+.card-header{
+    height: 55px;
 }
 
 .component-selector{
@@ -117,7 +152,7 @@ h3 {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #383838;
+    background: #3e393f;
 }
 
 #sidebar ul.components {
