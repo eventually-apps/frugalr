@@ -67,3 +67,4 @@ node_modules/
 # public hot reloading files
 public/*.hot-update.json
 public/*.hot-update.js
+public/app.js
