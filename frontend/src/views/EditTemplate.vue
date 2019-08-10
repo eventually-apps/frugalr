@@ -49,25 +49,46 @@
                     </div>           
                 </div> <!--End Accordion -->
                 <div class="submit-area">                  
-                    <button v-on:click="cancelModal()" type="button" class="btn btn-outline-danger btn-lg btn-finish">Cancel</button>                    
+                    <button type="button" @click="showModal('cancel')" class="btn btn-outline-danger btn-lg btn-finish">Cancel</button>                    
                     <button type="button" class="btn btn-outline-success btn-lg btn-finish">Finish</button>  
                 </div>
             </nav> <!-- Sidebar End -->
-            <div class="content"> <!-- Form Builder Start -->
-
-            </div>  <!-- End Form Area -->
-        </div>        
+            <div class="content"> <!-- Form Builder Start -->   
+                <div class="form-template">
+                </div>             
+            </div>  <!-- End Form Area -->            
+        </div>
+     <modal v-if="isModalVisible" :msg="modalBody" :titlemsg="modalTitle"  v-on:close="closeModal()"/>
     </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import CancelModal from './components/CancelModal.vue';
+import { Component, Prop, Vue } from 'vue-property-decorator';
+import Modal from '@/components/Modal.vue';
+import ModalService , { ModalType } from '../services/ModalService';
 
-@Component
+const modalService = new ModalService();
+
+@Component({
+    components: {
+        Modal,
+    },
+})
+
 export default class EditTemplate extends Vue {
-    public cancelModal(): any {
-        window.alert('ADD SOME REAL FUNCTIONALITY HERE');
+    @Prop() public modalBody!: string;
+    @Prop() public modalTitle!: string;
+
+    public isModalVisible = false;
+
+    public showModal(type: string) {
+        this.modalTitle = modalService.GetModalTitle(type);
+        this.modalBody = modalService.GetModalMessage(type);
+        this.isModalVisible = true;
+    }
+
+    public closeModal() {
+        this.isModalVisible = false;
     }
 }
 </script>
@@ -77,11 +98,20 @@ export default class EditTemplate extends Vue {
 
 .content{
     display: flex;
-    margin: 10vh;
+    margin: 5vh;
     width: 100vw;
     flex: 0 1 auto;
-    background-color: rgba(#dacfcf, .3);
-    border: 2px solid#363636
+    align-content: center;
+}
+
+.form-template {
+    position: relative;
+    background-color: rgba(#f3f3f3, .7);
+    margin-left: 20vw;
+    margin-right: 18vw;
+    flex: 0 auto;
+    width: 35vw;
+    border: 1px solid#363636;    
 }
 
 
