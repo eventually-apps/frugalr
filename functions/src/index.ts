@@ -6,3 +6,9 @@ import * as functions from 'firebase-functions';
 export const helloWorld = functions.https.onRequest((request, response) => {
     response.send("Hello from Firebase!!");
 });
+
+export const sendInvoice = functions.database.instance('frugalr-e77cf').ref('/invoices')
+.onCreate((snapshot, context) => {
+    console.log(snapshot);
+    console.log(context);
+})
