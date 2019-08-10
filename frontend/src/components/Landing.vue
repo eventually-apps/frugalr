@@ -7,15 +7,26 @@
     <router-link to="/create">
       <button type="button" class="btn btn-outline-light btn-lg start">Create Invoice</button>
     </router-link>
+    <button type="button" class="btn btn-outline-light btn-lg" @click="testInvoice">Test Invoice</button>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import { db, invoiceCollection } from '../firebase/firebase';
 
 @Component
 export default class Landing extends Vue {
   @Prop() private msg!: string;
+
+  testInvoice() {
+    invoiceCollection.add({
+      'invoice-name': 'Test Invoice',
+      'invoice-amount': 69.00
+    }).then((docRef) => {
+      console.log(docRef);
+    })
+  }
 }
 </script>
 

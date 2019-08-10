@@ -10,42 +10,44 @@
                         <p>Build your invoice!</p>              
                     </ul>             
                     <div class="panel-group" id="accordion">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="mb-0">
-                                    <button class="btn btn-link" type="button" data-toggle="collapse"  data-target="#collapse1">Group 1</button>
-                                </h4>
-                            </div>
-                            <div id="collapse1" class="collapse" data-parent="#accordion">
-                                <div class="card-body">
-                                    Blahsdfsdfsdfs fsdfsdfs
+                        <draggable>
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="mb-0">
+                                        <button class="btn btn-link" type="button" data-toggle="collapse"  data-target="#collapse1">Group 1</button>
+                                    </h4>
                                 </div>
-                            </div>
-                        </div> <!-- End 1 -->
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="mb-0">
-                                    <button  class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse2">Group 2</button>
-                                </h4>
-                            </div>
-                            <div id="collapse2" class="collapse" data-parent="#accordion">
-                                <div class="card-body">
-                                    Blah
+                                <div id="collapse1" class="collapse" data-parent="#accordion">
+                                    <div class="card-body">
+                                        Blahsdfsdfsdfs fsdfsdfs
+                                    </div>
                                 </div>
-                            </div>
-                        </div> <!-- End 2 -->
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="mb-0">
-                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse3">Group 3</button>
+                            </div> <!-- End 1 -->
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="mb-0">
+                                        <button  class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse2">Group 2</button>
+                                    </h4>
                                 </div>
-                            </div>
-                            <div id="collapse3" class="collapse" data-parent="#accordion">
-                                <div class="card-body">
-                                    Blah
+                                <div id="collapse2" class="collapse" data-parent="#accordion">
+                                    <div class="card-body">
+                                        Blah
+                                    </div>
                                 </div>
-                            </div>
-                        </div> <!-- End 3 -->
+                            </div> <!-- End 2 -->
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="mb-0">
+                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse3">Group 3</button>
+                                    </div>
+                                </div>
+                                <div id="collapse3" class="collapse" data-parent="#accordion">
+                                    <div class="card-body">
+                                        Blah
+                                    </div>
+                                </div>
+                            </div> <!-- End 3 -->
+                        </draggable>
                     </div>           
                 </div> <!--End Accordion -->
                 <div class="submit-area">                  
@@ -63,8 +65,13 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import CancelModal from './components/CancelModal.vue';
+import vuedraggable from 'vuedraggable';
 
-@Component
+@Component({
+    components: {
+        vuedraggable,
+    },
+})
 export default class EditTemplate extends Vue {
     public cancelModal(): any {
         window.alert('ADD SOME REAL FUNCTIONALITY HERE');
