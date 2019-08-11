@@ -6,9 +6,6 @@
                     <h3>Frugalr</h3>
                 </div>
                 <div class="component-selector overflow-auto">
-                    <ul class="list-unstyled components">
-                        <p>Build your invoice!</p>
-                    </ul>
                     <invoice-header-input/>
                 </div>
                 <div class="submit-area">
@@ -20,6 +17,9 @@
                 <div class="form-template container-fluid">
                     <div class="col">
                         <invoice-header/>
+                    </div>
+                    <div class="col">
+                        <invoice-body/>
                     </div>
                 </div>
             </div>  <!-- End Form Area -->
