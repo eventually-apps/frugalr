@@ -1,9 +1,9 @@
 <template>
-  <div class="form-row container-fluid">
+  <div class="form-row">
     <div class="col">
         <input type="text" class="form-control" placeholder="">
     </div>
-    <div class="col-3 pull-right">
+    <div class="col-3">
       <input type="text" class="form-control" placeholder="0.00">
     </div>
     <button type="button" class="btn btn-outline-danger remove-line"><i class="fa fa-minus"></i></button>

@@ -6,11 +6,14 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     recipientEmail: '',
+    userEmail: '',
   },
   mutations: {
     changeRecipEmail(state, rEmail) {
-      console.log('chad: ' + rEmail);
       state.recipientEmail = rEmail;
+    },
+    changeUserEmail(state, uEmail) {
+      state.userEmail = uEmail;
     }
   },
   actions: {
