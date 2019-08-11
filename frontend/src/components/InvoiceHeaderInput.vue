@@ -35,7 +35,7 @@ import Store from '../store';
 export default class InvoiceHeaderInput extends Vue {
     private rEmail: string = '';
     private userEmail: string = '';
-    
+
     public recipEmailListener(): void {
         Store.commit('changeRecipEmail', this.rEmail);
     }

@@ -15,12 +15,12 @@
             </nav> <!-- Sidebar End -->
             <div class="content"> <!-- Form Builder Start -->
                 <div class="form-template container-fluid">
-                    <div class="col">
+                    <div class="col invoice-header-area">
                         <invoice-header/>
-                    </div>
-                    <div class="col">
+                    </div>                 
+                    <form class="col">
                         <invoice-body/>
-                    </div>
+                    </form>                   
                 </div>
             </div>  <!-- End Form Area -->
         </div>
