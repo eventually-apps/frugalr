@@ -15,25 +15,32 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import { db, invoiceCollection } from '../firebase/firebase';
 import CurrencyService from '../services/CurrencyService';
+import InvoiceService from '../services/InvoiceService';
+import { Invoice } from '../models/invoice/Invoice';
 
 const currency = new CurrencyService();
+const invoiceService = new InvoiceService();
 
 @Component
 export default class Landing extends Vue {
   @Prop() public msg!: string;
-  @Prop() public amt!: string;
+
+  private amt: string = '';
 
   public created() {
     this.amt = currency.GenerateRandomAmount();
   }
-  
-  testInvoice() {
-    invoiceCollection.add({
-      'invoice-name': 'Test Invoice',
-      'invoice-amount': 69.00
-    }).then((docRef) => {
-      console.log(docRef);
-    })
+
+  public testInvoice() {
+    const invoice = new Invoice();
+    invoice.to = 'Chad';
+    invoice.items.push({item:  'Test', price: 100.0});
+    invoice.items.push({item:  'Test 2', price: 200.0});
+    invoiceService.createInvoice(invoice).then((docRec) => {
+      console.log(docRec);
+    });
+
+    console.log(invoice.invoiceAmount);
   }
 }
 </script>
