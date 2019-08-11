@@ -8,13 +8,9 @@ export const helloWorld = functions.https.onRequest((request, response) => {
     response.send("Hello from Firebase!!");
 });
 
-export const sendInvoice = functions.database.instance('frugalr-e77cf').ref('/invoices')
-.onCreate((snapshot, context) => {
-    console.log(snapshot);
-    console.log(context);
-})
 
-export const test = functions.firestore.document('/invoices/{invoiceAmount}').onCreate((data, context) => {
+export const generateInvoice = functions.firestore.document('/invoices/{invoiceId}').onCreate((data, context) => {
+    console.log(context);
     console.log(data);
-    return;
+    return 0;
 })
