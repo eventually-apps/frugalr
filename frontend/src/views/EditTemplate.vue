@@ -4,25 +4,25 @@
             <nav id="sidebar">
                 <div class="sidebar-header">
                     <h3>Frugalr</h3>
-                </div>        
+                </div>
                 <div class="component-selector overflow-auto">
                     <ul class="list-unstyled components">
-                        <p>Build your invoice!</p>              
+                        <p>Build your invoice!</p>
                     </ul>
                     <invoice-header-input/>
                 </div>
-                <div class="submit-area">                  
-                    <button type="button" @click="showModal('confirm')" class="btn btn-outline-success btn-lg btn-finish" style="margin-right: 15px;">Finish</button>  
-                    <button type="button" @click="showModal('cancel')" class="btn btn-outline-danger btn-lg btn-finish">Cancel</button>                    
+                <div class="submit-area">
+                    <button type="button" @click="showModal('confirm')" class="btn btn-outline-success btn-lg btn-finish" style="margin-right: 15px;">Finish</button>
+                    <button type="button" @click="showModal('cancel')" class="btn btn-outline-danger btn-lg btn-finish">Cancel</button>
                 </div>
             </nav> <!-- Sidebar End -->
-            <div class="content"> <!-- Form Builder Start -->   
+            <div class="content"> <!-- Form Builder Start -->
                 <div class="form-template container-fluid">
                     <div class="col">
                         <invoice-header/>
                     </div>
-                </div>             
-            </div>  <!-- End Form Area -->            
+                </div>
+            </div>  <!-- End Form Area -->
         </div>
      <modal v-if="isModalVisible" :msg="modalBody" :titlemsg="modalTitle"  v-on:close="closeModal()"/>
     </div>
@@ -48,7 +48,6 @@ const modalService = new ModalService();
         InvoiceFooter,
     },
 })
-
 export default class EditTemplate extends Vue {
     @Prop() public modalBody!: string;
     @Prop() public modalTitle!: string;
@@ -89,7 +88,7 @@ export default class EditTemplate extends Vue {
     margin-right: 18vw;
     flex: 0 auto;
     min-width: 35vw;
-    border: 1px solid#363636;    
+    border: 1px solid#363636;
 }
 
 
@@ -111,7 +110,7 @@ export default class EditTemplate extends Vue {
 }
 
 .component-selector{
-    //background: #c42d2d; //Temp 
+    //background: #c42d2d; //Temp
     min-height: 79vh;
     box-shadow: inset 0 0 5rem rgba(0, 0, 0, .3);
     // overflow-y: scroll;
