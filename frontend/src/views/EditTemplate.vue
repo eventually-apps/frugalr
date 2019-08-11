@@ -4,61 +4,25 @@
             <nav id="sidebar">
                 <div class="sidebar-header">
                     <h3>Frugalr</h3>
-                </div>        
+                </div>
                 <div class="component-selector overflow-auto">
                     <ul class="list-unstyled components">
-                        <p>Build your invoice!</p>              
-                    </ul>             
-                    <div class="panel-group" id="accordion">
-                        <draggable>
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="mb-0">
-                                        <button class="btn btn-link" type="button" data-toggle="collapse"  data-target="#collapse1">Group 1</button>
-                                    </h4>
-                                </div>
-                                <div id="collapse1" class="collapse" data-parent="#accordion">
-                                    <div class="card-body">
-                                        Blahsdfsdfsdfs fsdfsdfs
-                                    </div>
-                                </div>
-                            </div> <!-- End 1 -->
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="mb-0">
-                                        <button  class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse2">Group 2</button>
-                                    </h4>
-                                </div>
-                                <div id="collapse2" class="collapse" data-parent="#accordion">
-                                    <div class="card-body">
-                                        Blah
-                                    </div>
-                                </div>
-                            </div> <!-- End 2 -->
-                            <div class="card">
-                                <div class="card-header">
-                                    <div class="mb-0">
-                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse3">Group 3</button>
-                                    </div>
-                                </div>
-                                <div id="collapse3" class="collapse" data-parent="#accordion">
-                                    <div class="card-body">
-                                        Blah
-                                    </div>
-                                </div>
-                            </div> <!-- End 3 -->
-                        </draggable>
-                    </div>           
-                </div> <!--End Accordion -->
-                <div class="submit-area">                  
-                    <button type="button" @click="showModal('cancel')" class="btn btn-outline-danger btn-lg btn-finish">Cancel</button>                    
-                    <button type="button" class="btn btn-outline-success btn-lg btn-finish">Finish</button>  
+                        <p>Build your invoice!</p>
+                    </ul>
+                    <invoice-header-input/>
+                </div>
+                <div class="submit-area">
+                    <button type="button" @click="showModal('confirm')" class="btn btn-outline-success btn-lg btn-finish" style="margin-right: 15px;">Finish</button>
+                    <button type="button" @click="showModal('cancel')" class="btn btn-outline-danger btn-lg btn-finish">Cancel</button>
                 </div>
             </nav> <!-- Sidebar End -->
-            <div class="content"> <!-- Form Builder Start -->   
-                <div class="form-template">
-                </div>             
-            </div>  <!-- End Form Area -->            
+            <div class="content"> <!-- Form Builder Start -->
+                <div class="form-template container-fluid">
+                    <div class="col">
+                        <invoice-header/>
+                    </div>
+                </div>
+            </div>  <!-- End Form Area -->
         </div>
      <modal v-if="isModalVisible" :msg="modalBody" :titlemsg="modalTitle"  v-on:close="closeModal()"/>
     </div>
@@ -68,12 +32,20 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import Modal from '@/components/Modal.vue';
 import ModalService , { ModalType } from '../services/ModalService';
+import InvoiceHeader from '@/components/InvoiceHeader.vue';
+import InvoiceBody from '@/components/InvoiceBody.vue';
+import InvoiceFooter from '@/components/InvoiceFooter.vue';
+import InvoiceHeaderInput from '@/components/InvoiceHeaderInput.vue';
 
 const modalService = new ModalService();
 
 @Component({
     components: {
         Modal,
+        InvoiceHeaderInput,
+        InvoiceHeader,
+        InvoiceBody,
+        InvoiceFooter,
     },
 })
 export default class EditTemplate extends Vue {
@@ -97,6 +69,10 @@ export default class EditTemplate extends Vue {
 
 <style lang="scss">
 
+.col{
+    margin-top: 5px;
+}
+
 .content{
     display: flex;
     margin: 5vh;
@@ -111,18 +87,13 @@ export default class EditTemplate extends Vue {
     margin-left: 20vw;
     margin-right: 18vw;
     flex: 0 auto;
-    width: 35vw;
-    border: 1px solid#363636;    
+    min-width: 35vw;
+    border: 1px solid#363636;
 }
 
-
-.btn-link{
-    color:#fff;
-    text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
-}
 
 .btn:hover {
-    color: #383838;
+    color: #ffffff;
     text-decoration: none;
 }
 
@@ -139,7 +110,7 @@ export default class EditTemplate extends Vue {
 }
 
 .component-selector{
-    //background: #c42d2d; //Temp 
+    //background: #c42d2d; //Temp
     min-height: 79vh;
     box-shadow: inset 0 0 5rem rgba(0, 0, 0, .3);
     // overflow-y: scroll;
