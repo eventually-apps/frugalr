@@ -2,7 +2,7 @@
   <div class="main-landing">
     <p class ="title">{{ msg }}</p>
     <p class ="sub-title">Send your friends invoices</p>
-    <p class="catchphrase">Tired of friends asking why they owe you 27.46 for <i class="em-svg em-eggplant"/><i class="em-svg em-custard"/><i class="em-svg em-pizza"/> ?</P>
+    <p class="catchphrase">Tired of friends asking why they owe you {{amt}} for <i class="em-svg em-eggplant"/><i class="em-svg em-custard"/><i class="em-svg em-pizza"/> ?</P>
     <p class="catchphrase">Now you can send them a friendly invoice and never forget!</p>
     <router-link to="/create">
       <button type="button" class="btn btn-outline-light btn-lg start">Create Invoice</button>
@@ -14,11 +14,19 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import { db, invoiceCollection } from '../firebase/firebase';
+import CurrencyService from '../services/CurrencyService';
+
+const currency = new CurrencyService();
 
 @Component
 export default class Landing extends Vue {
-  @Prop() private msg!: string;
+  @Prop() public msg!: string;
+  @Prop() public amt!: string;
 
+  public created() {
+    this.amt = currency.GenerateRandomAmount();
+  }
+  
   testInvoice() {
     invoiceCollection.add({
       'invoice-name': 'Test Invoice',
