@@ -1,23 +1,40 @@
 <template>
-  <div class="form-row">
-    <div class="col">
-        <input type="text" class="form-control" placeholder="">
+ <div class="form-row">
+    <div class="form-group col-md-9">
+      <input type="email" class="form-control" placeholder="">
     </div>
-    <div class="col-3">
-      <input type="text" class="form-control" placeholder="0.00">
+    <div class="form-group col-md-2">
+      <input type="password" class="form-control"  placeholder="0.00">
     </div>
-    <button type="button" class="btn btn-outline-danger remove-line"><i class="fa fa-minus"></i></button>
+    <span class="col-md-1">
+      <button v-if="!showAdd" type="button" class="btn btn-outline-danger remove-line" @click="removeItem(currentIndex)"><i class="fa fa-minus"></i></button>
+      <button v-if="showAdd" type="button" class="btn btn-outline-success add-line" @click="addItem()"><i class="fa fa-plus"></i></button>
+    </span>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import Store from '../store';
 
 @Component
-export default class LineItem extends Vue {}
+export default class LineItem extends Vue {
+  @Prop() private showAdd!: boolean;
+  @Prop() private currentIndex!: number;
+
+  public addItem(): void {
+    Store.commit('addInvoiceLine', { item: '', price: 0 });
+  }
+
+  public removeItem(index: number): void {
+    Store.commit('removeInvoiceLine', index);
+  }
+
+}
 </script>
 
 <style lang="scss">
+
 .btn:hover {
   color: #ffffff;
 }
