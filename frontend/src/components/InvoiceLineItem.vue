@@ -4,7 +4,7 @@
       <input type="email" class="form-control" placeholder="">
     </div>
     <div class="form-group col-md-2">
-      <input type="password" class="form-control"  placeholder="0.00">
+      <input type="number" class="form-control"  placeholder="0.00">
     </div>
     <span class="col-md-1">
       <button v-if="!showAdd" type="button" class="btn btn-outline-danger remove-line" @click="removeItem(currentIndex)"><i class="fa fa-minus"></i></button>
