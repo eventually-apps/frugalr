@@ -7,6 +7,9 @@ Vue.use(Vuex);
 export interface RoostState {
   recipientEmail: string;
   userEmail: string;
+  toFirstName: string;
+  toLastName: string;
+  totalPrice: number;
   invoiceItems: InvoiceItem[];
 }
 
@@ -14,6 +17,9 @@ export default new Vuex.Store<RoostState>({
   state: {
     recipientEmail: '',
     userEmail: '',
+    toFirstName: '',
+    toLastName: '',
+    totalPrice: 0.00,
     invoiceItems: [{item: '', price: 0}],
   },
   mutations: {
@@ -28,6 +34,12 @@ export default new Vuex.Store<RoostState>({
     },
     removeInvoiceLine(state, index: number) {
       state.invoiceItems.splice(index, 1);
+    },
+    changeToFirstName(state, name) {
+      state.toFirstName = name;
+    },
+    changeToLastName(state, name) {
+      state.toLastName = name;
     },
   },
   actions: {

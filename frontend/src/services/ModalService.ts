@@ -11,7 +11,7 @@ export default class ModalService {
     public GetModalTitle(type: string): string {
         switch (type) {
             case ModalType.Confirm: {
-                return 'Confirm Changes';
+                return 'Confirm Invoice';
             }
             case ModalType.Cancel: {
                 return 'Confirm Cancel';
@@ -31,7 +31,7 @@ export default class ModalService {
                 return 'Are you really sure you wanna cancel??';
             }
             default: {
-                return 'Body Message';
+                return 'I have nothing to tell you';
             }
         }
     }

@@ -1,28 +1,20 @@
 <template>
     <div class="header-input container">
-        <div class="recip-info">
-            <h5>Bill To:</h5>
-            <hr>
-            <div class="form-row col">
-                <div class="col-md-6">
-                    <label>First Name</label>
-                    <input type="text" class="form-control">
-                </div>
-                <div class="col-md-6">
-                    <label>Last Name</label>
-                    <input type="text" class="form-control">
-                </div>
+        <h5>Bill To:</h5>
+        <hr>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <input type="text" class="form-control" @input="firstNameListen" v-model="toFirstName" placeholder="First Name">
             </div>
-            <div class="col">
-                <label for="recipient-email">Email</label>
-                <input type="email" id="recipient-email" class="form-control" @input="recipEmailListener" v-model="rEmail">
-            </div>     
+            <div class="form-group col-md-6">
+                <input type="text" class="form-control" @input="lastNameListen" v-model="toLastName" placeholder="Last Name">
+            </div>
         </div>
-        <div class="user-info">
-            <div class="col">
-                <label for="user-email">Your Email</label>
-                <input type="email" id="user-email" class="form-control" placeholder="">
-            </div> 
+        <div class="form-group">
+            <input type="text" class="form-control" @input="recipEmailListener" v-model="rEmail" placeholder="Recipent Email">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Your Email">
         </div>
     </div>
 </template>
@@ -35,22 +27,24 @@ import Store from '../store';
 export default class InvoiceHeaderInput extends Vue {
     private rEmail: string = '';
     private userEmail: string = '';
+    private toFirstName: string = '';
+    private toLastName: string = '';
 
     public recipEmailListener(): void {
         Store.commit('changeRecipEmail', this.rEmail);
+    }
+
+    public firstNameListen(): void {
+        Store.commit('changeToFirstName', this.toFirstName);
+    }
+
+    public lastNameListen(): void {
+        Store.commit('changeToLastName', this.toLastName);
     }
 }
 </script>
 
 <style lang="scss">
-.col{
-    margin: 5px;
-}
-
-.user-info{
-    margin-top: 10px;
-}
-
 .header-input{
     margin-top: 15px;
 }

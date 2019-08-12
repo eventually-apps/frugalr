@@ -6,7 +6,12 @@
                     <h3>Frugalr</h3>
                 </div>
                 <div class="component-selector overflow-auto">
-                    <invoice-header-input/>
+                    <div class="col">
+                        <invoice-header-input/>
+                    </div>
+                    <div class="col">
+                        <email-input/>
+                    </div>
                 </div>
                 <div class="submit-area">
                     <button type="button" @click="showModal('confirm')" class="btn btn-outline-success btn-lg btn-finish" style="margin-right: 15px;">Finish</button>
@@ -14,11 +19,9 @@
                 </div>
             </nav> <!-- Sidebar End -->
             <div class="content"> <!-- Form Builder Start -->
-                <div class="form-template container-fluid">
-                    <div class="col invoice-header-area">
-                        <invoice-header/>
-                    </div>                 
-                    <form class="col">
+                <div class="form-template container-fluid">         
+                    <invoice-header/>
+                    <form>
                         <invoice-body/>
                     </form>                   
                 </div>
@@ -36,6 +39,7 @@ import InvoiceHeader from '@/components/InvoiceHeader.vue';
 import InvoiceBody from '@/components/InvoiceBody.vue';
 import InvoiceFooter from '@/components/InvoiceFooter.vue';
 import InvoiceHeaderInput from '@/components/InvoiceHeaderInput.vue';
+import EmailInput from '@/components/EmailInput.vue';
 
 const modalService = new ModalService();
 
@@ -46,6 +50,7 @@ const modalService = new ModalService();
         InvoiceHeader,
         InvoiceBody,
         InvoiceFooter,
+        EmailInput,
     },
 })
 export default class EditTemplate extends Vue {
@@ -69,6 +74,13 @@ export default class EditTemplate extends Vue {
 
 <style lang="scss">
 
+.aaa {
+    background-color: rgb(99, 99, 99);
+    min-width: inherit;
+    min-height: 10%;
+    box-shadow: inset 0 0 5rem rgba(0, 0, 0, .3);
+}
+
 .col{
     margin-top: 5px;
 }
@@ -83,11 +95,11 @@ export default class EditTemplate extends Vue {
 
 .form-template {
     position: relative;
-    background-color: rgba(#f3f3f3, .7);
+    background-color: rgba(#f3f3f3, .5);
     margin-left: 20vw;
     margin-right: 18vw;
     flex: 0 auto;
-    min-width: 35vw;
+    min-width: 38vw;
     border: 1px solid#363636;
 }
 
