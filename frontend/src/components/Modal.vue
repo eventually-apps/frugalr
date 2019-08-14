@@ -1,11 +1,11 @@
 <template>
   <div class="modal-backdrop">
     <div class="modal">
-      <header class="modal-header">
+      <div class="modal-header">
         <slot name="header">
-          {{titlemsg}}
+          <h4>{{titlemsg}}</h4>
         </slot>
-      </header>
+      </div>
       <section class="modal-body">
         <slot name="body">
           {{msg}}
@@ -13,8 +13,8 @@
        </section>
        <footer class="modal-footer">
           <slot name="footer">
-            <button type="button" class="btn btn-outline-success" >Confirm</button>
-            <button type="button" class="btn btn-outline-danger" @click="close">Cancel</button>
+            <button type="button" class="btn btn-outline-success" >{{successMsg}}</button>
+            <button type="button" class="btn btn-outline-danger" @click="close">{{dangerMsg}}</button>
         </slot>
       </footer>
     </div>
@@ -28,12 +28,13 @@ import { Vue, Component, Prop } from 'vue-property-decorator';
 export default class Modal extends Vue {
   @Prop({default: 'hello'}) public titlemsg!: string;
   @Prop({default: 'no'}) public msg!: string;
+  @Prop() public successMsg!: string;
+  @Prop() public dangerMsg!: string;
 
   private isVisible = true;
 
   public close(): void {
     this.$emit('close');
-    console.log('chad');
   }
 }
 </script>
@@ -55,11 +56,11 @@ export default class Modal extends Vue {
    .modal-body {
     position: relative;
     padding: 20px 10px;
-    color: #000000;
+    color: #ffffff;
   }
 
   .modal {
-    background: rgb(211, 211, 211);
+    background: #414040;
     box-shadow: 2px 2px 20px 1px;
     display: flex;
     flex-direction: column;
@@ -71,22 +72,25 @@ export default class Modal extends Vue {
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+    border-radius: 1%;
   }
 
   .modal-header,
   .modal-footer {
     padding: 15px;
     display: flex;
+    text-align: center;
+    font-weight: bold;
   }
 
   .modal-header {
-    // border-bottom: 1px solid #925555;
-    color: rgb(0, 0, 0);
-    // justify-content: space-between;
+    border-bottom: 1px solid rgba(#2b2b2b, .7);
+    color: rgb(255, 255, 255);
+    justify-content: center;
   }
 
   .modal-footer {
-    // border-top: 1px solid #eeeeee;
+    border-top: 1px solid rgba(#2b2b2b, .7) !important;
     justify-content: flex-end;
   }
 
@@ -94,6 +98,4 @@ export default class Modal extends Vue {
     position: relative;
     padding: 20px 10px;
   }
-
-
 </style>

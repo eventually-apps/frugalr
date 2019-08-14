@@ -3,7 +3,7 @@
         <h5>Message:</h5>
         <hr>
         <div class="form-row">
-            <textarea class="form-control msg-box" placeholder="Enter an optional message you'd like to say..."></textarea>
+            <textarea class="form-control msg-box" placeholder="Enter an optional message..."></textarea>
         </div>
     </div>
 </template>

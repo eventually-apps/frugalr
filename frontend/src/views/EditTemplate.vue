@@ -23,11 +23,12 @@
                     <invoice-header/>
                     <form>
                         <invoice-body/>
-                    </form>                   
+                    </form>    
+                    <invoice-footer/>               
                 </div>
             </div>  <!-- End Form Area -->
         </div>
-     <modal v-if="isModalVisible" :msg="modalBody" :titlemsg="modalTitle"  v-on:close="closeModal()"/>
+     <modal v-if="isModalVisible" :msg="modalBody" :titlemsg="modalTitle" :successMsg="successMsg" :dangerMsg="dangerMsg"  v-on:close="closeModal()"/>
     </div>
 </template>
 
@@ -56,12 +57,19 @@ const modalService = new ModalService();
 export default class EditTemplate extends Vue {
     @Prop() public modalBody!: string;
     @Prop() public modalTitle!: string;
+    @Prop() public dangerMsg!: string;
+    @Prop() public successMsg!: string;
 
     public isModalVisible = false;
 
     public showModal(type: string) {
+        const buttons = modalService.GetModalButtons(type);
+
         this.modalTitle = modalService.GetModalTitle(type);
         this.modalBody = modalService.GetModalMessage(type);
+        this.dangerMsg = buttons.danger;
+        this.successMsg = buttons.success;
+
         this.isModalVisible = true;
     }
 

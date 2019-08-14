@@ -14,7 +14,7 @@
             <input type="text" class="form-control" @input="recipEmailListener" v-model="rEmail" placeholder="Recipent Email">
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Your Email">
+            <input type="text" class="form-control" @input="userEmailListen" v-model="userEmail" placeholder="Your Email">
         </div>
     </div>
 </template>
@@ -40,6 +40,10 @@ export default class InvoiceHeaderInput extends Vue {
 
     public lastNameListen(): void {
         Store.commit('changeToLastName', this.toLastName);
+    }
+
+    public userEmailListen(): void {
+        Store.commit('changeUserEmail', this.userEmail);
     }
 }
 </script>

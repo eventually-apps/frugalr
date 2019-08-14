@@ -1,14 +1,16 @@
 <template>
-    <div class="invoice-body col">
+    <div class="col">
         <div class="item-header row">
             <div class="col-md-9 pull-left">
                 Item Description
             </div>
-            <div class ="col-md-2 pull-left">
+            <div class ="col-md-3 pull-left">
                 Price
             </div>
         </div>
-        <invoice-line-item v-for="(item, index) in InvoiceItems" v-bind:key="index" :showAdd="ableToAddInvoiceItem(index)" :currentIndex="index"/>
+        <div class="invoice-body">
+            <invoice-line-item v-for="(item, index) in InvoiceItems" v-bind:key="index" :showAdd="ableToAddInvoiceItem(index)" :currentIndex="index"/>
+        </div>
     </div>
 </template>
 
@@ -38,10 +40,15 @@ export default class InvoiceBody extends Vue {
 
 <style lang="scss">
 .item-header {
+    font-weight: bold;
+    text-align: left;
     color: #000000;
+    border-bottom: 8px solid rgba(#252525, .4);
 }
 
 .invoice-body{
+    margin-top: 10px;
+    min-height: 525px;
     max-height: 525px;
     overflow-x: hidden;    
     overflow-y: auto;
