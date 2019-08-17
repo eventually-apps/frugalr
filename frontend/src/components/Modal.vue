@@ -13,7 +13,7 @@
        </section>
        <footer class="modal-footer">
           <slot name="footer">
-            <button type="button" class="btn btn-outline-success" >{{successMsg}}</button>
+            <button type="button" class="btn btn-outline-success" @click="submit">{{successMsg}}</button>
             <button type="button" class="btn btn-outline-danger" @click="close">{{dangerMsg}}</button>
         </slot>
       </footer>
@@ -30,11 +30,16 @@ export default class Modal extends Vue {
   @Prop({default: 'no'}) public msg!: string;
   @Prop() public successMsg!: string;
   @Prop() public dangerMsg!: string;
+  @Prop() public modalType!: string;
 
   private isVisible = true;
 
   public close(): void {
     this.$emit('close');
+  }
+
+  public submit(): void {
+    this.$emit('submitModal', this.modalType);
   }
 }
 </script>

@@ -28,7 +28,7 @@
                 </div>
             </div>  <!-- End Form Area -->
         </div>
-     <modal v-if="isModalVisible" :msg="modalBody" :titlemsg="modalTitle" :successMsg="successMsg" :dangerMsg="dangerMsg"  v-on:close="closeModal()"/>
+     <modal v-if="isModalVisible" :msg="modalBody" :titlemsg="modalTitle" :successMsg="successMsg" :dangerMsg="dangerMsg" :modalType="modalType"  v-on:close="closeModal()" v-on:submitModal="submitModal"/>
     </div>
 </template>
 
@@ -59,22 +59,33 @@ export default class EditTemplate extends Vue {
     @Prop() public modalTitle!: string;
     @Prop() public dangerMsg!: string;
     @Prop() public successMsg!: string;
+    @Prop() public modalType!: string;
 
     public isModalVisible = false;
 
     public showModal(type: string) {
         const buttons = modalService.GetModalButtons(type);
-
+        this.modalType = type;
         this.modalTitle = modalService.GetModalTitle(type);
         this.modalBody = modalService.GetModalMessage(type);
         this.dangerMsg = buttons.danger;
-        this.successMsg = buttons.success;
-
+        this.successMsg = buttons.success;        
         this.isModalVisible = true;
     }
 
     public closeModal() {
         this.isModalVisible = false;
+    }
+
+    public submitModal(type: string) {
+        console.log(type);
+        if(type === ModalType.Cancel){
+            this.$router.push('/');
+        }
+
+        if(type === ModalType.Confirm){
+            this.$router.push('/confirmation');
+        }        
     }
 }
 </script>
