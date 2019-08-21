@@ -69,7 +69,7 @@ export default class EditTemplate extends Vue {
         this.modalTitle = modalService.GetModalTitle(type);
         this.modalBody = modalService.GetModalMessage(type);
         this.dangerMsg = buttons.danger;
-        this.successMsg = buttons.success;        
+        this.successMsg = buttons.success;
         this.isModalVisible = true;
     }
 
@@ -79,13 +79,13 @@ export default class EditTemplate extends Vue {
 
     public submitModal(type: string) {
         console.log(type);
-        if(type === ModalType.Cancel){
+        if (type === ModalType.Cancel) {
             this.$router.push('/');
         }
 
-        if(type === ModalType.Confirm){
+        if (type === ModalType.Confirm) {
             this.$router.push('/confirmation');
-        }        
+        }
     }
 }
 </script>
