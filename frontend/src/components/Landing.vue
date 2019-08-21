@@ -34,8 +34,8 @@ export default class Landing extends Vue {
   public testInvoice() {
     const invoice = new Invoice();
     invoice.to = 'Chad';
-    invoice.items.push({item:  'Test', price: 100.0});
-    invoice.items.push({item:  'Test 2', price: 200.0});
+    invoice.items.push({item:  'Pizza', price: 100.0});
+    invoice.items.push({item:  'Eggplant Pizza', price: 200.0});
     invoiceService.createInvoice(invoice).then((docRec) => {
       console.log(docRec);
     });

@@ -32,4 +32,9 @@ export function setTitle(title: string) {
  */
 export const appConsts: IAppConsts = {
     appName: 'Fruglar',
+    firebase: {
+        projectId: process.env.VUE_APP_FIREBASE_PROJECT_ID,
+        apiKey: process.env.VUE_APP_FIREBASE_API_KEY,
+        authDomain: process.env.VUE_APP_FIREBASE_AUTH_DOMAIN,
+    },
 };
