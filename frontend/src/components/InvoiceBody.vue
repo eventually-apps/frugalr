@@ -20,7 +20,11 @@ import InvoiceLineItem from '@/components/InvoiceLineItem.vue';
 import { InvoiceItem } from '../models/invoice/InvoiceItem';
 import Store from '../store';
 
-@Component
+@Component({
+    components: {
+        InvoiceLineItem
+    }
+})
 export default class InvoiceBody extends Vue {
 
     public get InvoiceItems(): InvoiceItem[] {
@@ -52,5 +56,11 @@ export default class InvoiceBody extends Vue {
     max-height: 525px;
     overflow-x: hidden;    
     overflow-y: auto;
+}
+
+::-webkit-scrollbar {
+    width: 14px;
+    height: 18px;
+    margin-left: 5px;
 }
 </style>
