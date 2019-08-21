@@ -1,10 +1,11 @@
 import * as firebase from 'firebase/app';
 import 'firebase/firestore';
+import { appConsts } from '@/lib/utils';
 
 firebase.initializeApp({
-    apiKey: 'AIzaSyDcqC-UfwvC1D1qV6GwAo_u7GtrYRT5zss',
-    projectId: 'frugalr-e77cf',
-    authDomain: 'frugalr-e77cf.firebaseapp.com',
+    apiKey: appConsts.firebase.apiKey,
+    projectId: appConsts.firebase.projectId,
+    authDomain: appConsts.firebase.authDomain,
 });
 
 const db = firebase.firestore();
