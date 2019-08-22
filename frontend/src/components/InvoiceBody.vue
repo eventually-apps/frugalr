@@ -22,8 +22,8 @@ import Store from '../store';
 
 @Component({
     components: {
-        InvoiceLineItem
-    }
+        InvoiceLineItem,
+    },
 })
 export default class InvoiceBody extends Vue {
 

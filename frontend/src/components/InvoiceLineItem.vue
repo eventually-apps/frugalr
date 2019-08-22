@@ -1,10 +1,10 @@
 <template>
  <div class="form-row">
     <div class="form-group col-md-9">
-      <input type="email" class="form-control" placeholder="">
+      <input v-model="item" type="email" class="form-control" placeholder="">
     </div>
     <div class="form-group col-md-2">
-      <input type="number" class="form-control" placeholder="0.00">
+      <input v-model="price" type="number" class="form-control" placeholder="0.00">
     </div>
     <span class="col-md-1">
       <button v-if="!showAdd" type="button" class="btn btn-outline-danger remove-line" @click="removeItem(currentIndex)"><i class="fa fa-minus"></i></button>
@@ -16,6 +16,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import Store from '../store';
+import { InvoiceItem } from '@/models/invoice/InvoiceItem';
 
 @Component
 export default class LineItem extends Vue {
@@ -28,6 +29,30 @@ export default class LineItem extends Vue {
 
   public removeItem(index: number): void {
     Store.commit('removeInvoiceLine', index);
+  }
+
+  public get item() {
+    return Store.state.invoiceItems[this.currentIndex].item;
+  }
+
+  public set item(value: string) {
+    const payload = {
+      index: this.currentIndex,
+      item: value,
+    };
+    Store.commit('updateInvoiceItem', payload);
+  }
+
+  public get price() {
+    return Store.state.invoiceItems[this.currentIndex].price;
+  }
+
+  public set price(value: number) {
+    const payload = {
+      index: this.currentIndex,
+      price: Number(value),
+    };
+    Store.commit('updateInvoicePrice', payload);
   }
 }
 </script>
