@@ -24,6 +24,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
 import FormService from '../services/FormService';
+import { ModalType } from '../services/ModalService';
 
 const formService = new FormService();
 
@@ -45,7 +46,7 @@ export default class Modal extends Vue {
     const checkForm = formService.CheckFormSubmission().Success;
     const validationResponse = formService.CheckFormSubmission().Message;
 
-    if (checkForm === true) {
+    if (checkForm === true || this.modalType === ModalType.Cancel) {
       this.$emit('submitModal', this.modalType);
     } else {
       this.titlemsg = 'ERROR';

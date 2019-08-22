@@ -21,6 +21,10 @@ export default class FormService {
             return { Success: false, Message: 'Please make sure the your email address is valid.' };
         }
 
+        if (!this.ValidateLineItem()) {
+            return { Success: false, Message: 'Please make sure each invoice item is valid.' };
+        }
+
         return { Success: true, Message: 'Success' };
     }
 
@@ -54,4 +58,19 @@ export default class FormService {
 
         return false;
     }
+
+    private ValidateLineItem(): boolean {
+        for (const item of Store.state.invoiceItems) {
+            if (Math.floor(item.price) > Math.floor(0.00)) {
+                if (item.item.length > 0 || item.item !== '') {
+                    return true;
+                }
+            } else {
+                return false;
+            }
+        }
+
+        return false;
+    }
+
 }

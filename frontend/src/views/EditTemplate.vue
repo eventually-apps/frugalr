@@ -36,6 +36,7 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import Modal from '@/components/Modal.vue';
 import ModalService , { ModalType } from '../services/ModalService';
+import FormService from '../services/FormService';
 import InvoiceHeader from '@/components/InvoiceHeader.vue';
 import InvoiceBody from '@/components/InvoiceBody.vue';
 import InvoiceFooter from '@/components/InvoiceFooter.vue';
@@ -44,6 +45,7 @@ import EmailInput from '@/components/EmailInput.vue';
 import Store from '../store';
 
 const modalService = new ModalService();
+const formService = new FormService();
 
 @Component({
     components: {
@@ -63,6 +65,10 @@ export default class EditTemplate extends Vue {
     @Prop() public modalType!: string;
 
     public isModalVisible = false;
+
+    public created() {
+        formService.ResetForm();
+    }
 
     public showModal(type: string) {
         const buttons = modalService.GetModalButtons(type);
