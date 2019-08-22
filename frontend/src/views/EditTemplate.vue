@@ -41,6 +41,7 @@ import InvoiceBody from '@/components/InvoiceBody.vue';
 import InvoiceFooter from '@/components/InvoiceFooter.vue';
 import InvoiceHeaderInput from '@/components/InvoiceHeaderInput.vue';
 import EmailInput from '@/components/EmailInput.vue';
+import Store from '../store';
 
 const modalService = new ModalService();
 

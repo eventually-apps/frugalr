@@ -41,6 +41,13 @@ export default new Vuex.Store<RoostState>({
     changeToLastName(state, name) {
       state.toLastName = name;
     },
+    resetEverything(state) {
+      state.toFirstName = '';
+      state.toLastName = '';
+      state.recipientEmail = '';
+      state.invoiceItems = [];
+      state.totalPrice = 0.00;
+    },
   },
   actions: {
 

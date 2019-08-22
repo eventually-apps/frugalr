@@ -1,4 +1,4 @@
-// Not actually a service to get you a date.
+// Not actually a service to get you a date, you're on your own for that one.
 
 export default class DateService {
 

@@ -7,7 +7,7 @@
     <router-link to="/create">
       <button type="button" class="btn btn-outline-light btn-lg start">Create Invoice</button>
     </router-link>
-    <button type="button" class="btn btn-outline-light btn-lg" @click="testInvoice">Test Invoice</button>
+      <button type="button" class="btn btn-outline-light btn-lg" @click="testInvoice">Test Invoice</button>
   </div>
 </template>
 
