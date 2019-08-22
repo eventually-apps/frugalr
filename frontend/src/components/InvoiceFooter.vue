@@ -13,7 +13,7 @@ import Store from '../store';
 @Component
 export default class InvoiceFooter extends Vue {
     private get totalAmount(): number {
-        return Store.state.totalPrice;
+        return Store.getters.totalPrice;
     }
 }
 </script>
