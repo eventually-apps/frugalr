@@ -23,6 +23,9 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
+import FormService from '../services/FormService';
+
+const formService = new FormService();
 
 @Component
 export default class Modal extends Vue {
@@ -39,7 +42,15 @@ export default class Modal extends Vue {
   }
 
   public submit(): void {
-    this.$emit('submitModal', this.modalType);
+    const checkForm = formService.CheckFormSubmission().Success;
+    const validationResponse = formService.CheckFormSubmission().Message;
+
+    if (checkForm === true) {
+      this.$emit('submitModal', this.modalType);
+    } else {
+      this.titlemsg = 'ERROR';
+      this.msg = validationResponse;
+    }
   }
 }
 </script>

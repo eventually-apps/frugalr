@@ -175,7 +175,6 @@ h3 {
 }
 
 #sidebar {
-    /* don't forget to add all the previously mentioned styles here too */
     background: #414040;
     color: #fff;
     transition: all 0.3s;

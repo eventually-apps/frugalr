@@ -9,19 +9,19 @@ export default class FormService {
     // Let's make sure the Vuex has data. Ideally we should only care for the required data.
     public CheckFormSubmission(): any {
 
-        if (this.ValidatePersonName()) {
-            return { Message: 'Please fill out the first and last name.' };
+        if (!this.ValidatePersonName()) {
+            return { Success: false, Message: 'Please fill out the first and last name.' };
         }
 
-        if (this.ValidateRecipEmail()) {
-            return { Message: 'Please make sure the recipient email address is valid.' };
+        if (!this.ValidateRecipEmail()) {
+            return { Success: false, Message: 'Please make sure the recipient email address is valid.' };
         }
 
-        if (this.ValidateUserEmail()) {
-            return { Message: 'Please make sure the your email address is valid.' };
+        if (!this.ValidateUserEmail()) {
+            return { Success: false, Message: 'Please make sure the your email address is valid.' };
         }
 
-        return { Message: 'Success' };
+        return { Success: true, Message: 'Success' };
     }
 
     // We're gonna purge all the Vuex stored data
@@ -31,8 +31,8 @@ export default class FormService {
 
     // Private Parts
     private ValidatePersonName(): boolean {
-        if (Store.state.toFirstName !== '' && Store.state.toFirstName.length > 1 &&
-            Store.state.toLastName !== '' && Store.state.toLastName.length > 1) {
+        if (Store.state.toFirstName !== '' && Store.state.toFirstName.length > 0 &&
+            Store.state.toLastName !== '' && Store.state.toLastName.length > 0) {
                 return true;
             }
 
