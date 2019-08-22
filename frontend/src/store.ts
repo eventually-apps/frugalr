@@ -50,7 +50,6 @@ export default new Vuex.Store<RoostState>({
       state.toLastName = '';
       state.recipientEmail = '';
       state.invoiceItems = [];
-      state.totalPrice = 0.00;
     },
     updateInvoiceItem(state, { index, item }) {
       state.invoiceItems[index].item = item;
