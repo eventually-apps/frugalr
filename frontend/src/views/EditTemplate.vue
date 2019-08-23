@@ -10,7 +10,7 @@
                         <invoice-header-input/>
                     </div>
                     <div class="col">
-                        <email-input/>
+                        <email-input v-model="message"/>
                     </div>
                 </div>
                 <div class="submit-area">
@@ -65,6 +65,7 @@ export default class EditTemplate extends Vue {
     @Prop() public modalType!: string;
 
     public isModalVisible = false;
+    public message: string = '';
 
     public created() {
         formService.ResetForm();
@@ -91,7 +92,7 @@ export default class EditTemplate extends Vue {
         }
 
         if (type === ModalType.Confirm) {
-            this.$router.push('/confirmation');
+            Store.dispatch('sendInvoice', this.message);
         }
     }
 }

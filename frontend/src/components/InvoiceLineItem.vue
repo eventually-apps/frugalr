@@ -1,7 +1,7 @@
 <template>
  <div class="form-row">
     <div class="form-group col-md-9">
-      <input v-model="item" type="email" class="form-control" placeholder="">
+      <input v-model="item" type="text" class="form-control" placeholder="">
     </div>
     <div class="form-group col-md-2">
       <input v-model="price" type="number" class="form-control" placeholder="0.00">

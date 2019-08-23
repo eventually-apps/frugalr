@@ -30,18 +30,6 @@ export default class Landing extends Vue {
   public created() {
     this.amt = currency.GenerateRandomAmount();
   }
-
-  public testInvoice() {
-    const invoice = new Invoice();
-    invoice.to = 'Chad';
-    invoice.items.push({item:  'Pizza', price: 100.0});
-    invoice.items.push({item:  'Eggplant Pizza', price: 200.0});
-    invoiceService.createInvoice(invoice).then((docRec) => {
-      console.log(docRec);
-    });
-
-    console.log(invoice.invoiceAmount);
-  }
 }
 </script>
 

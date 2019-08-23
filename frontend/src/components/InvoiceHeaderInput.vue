@@ -11,10 +11,10 @@
             </div>
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" @input="recipEmailListener" v-model="rEmail" placeholder="Recipent Email">
+            <input type="email" class="form-control" @input="recipEmailListener" v-model="rEmail" placeholder="Recipent Email">
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" @input="userEmailListen" v-model="userEmail" placeholder="Your Email">
+            <input type="email" class="form-control" @input="userEmailListen" v-model="userEmail" placeholder="Your Email">
         </div>
     </div>
 </template>

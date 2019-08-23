@@ -2,10 +2,13 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import { InvoiceItem } from './models/invoice/InvoiceItem';
 import { sum } from './lib/utils';
+import InvoiceService from '@/services/InvoiceService';
+import { Invoice } from './models/invoice/Invoice';
+import router from '@/router/router';
 
 Vue.use(Vuex);
 
-export interface RoostState {
+export interface RootState {
   recipientEmail: string;
   userEmail: string;
   toFirstName: string;
@@ -13,7 +16,9 @@ export interface RoostState {
   invoiceItems: InvoiceItem[];
 }
 
-export default new Vuex.Store<RoostState>({
+const invoiceService = new InvoiceService();
+
+export default new Vuex.Store<RootState>({
   state: {
     recipientEmail: '',
     userEmail: '',
@@ -24,6 +29,19 @@ export default new Vuex.Store<RoostState>({
   getters: {
     totalPrice(state): number {
       return sum(state.invoiceItems, (item) => item.price);
+    },
+    toFullName(state): string {
+      return `${state.toFirstName} ${state.toLastName}`;
+    },
+  },
+  actions: {
+    sendInvoice({ state, getters }, message) {
+      const invoice = new Invoice(getters.toFullName, state.recipientEmail,
+        state.userEmail, message, state.invoiceItems);
+
+      invoiceService.createInvoice(invoice).then((ref: firebase.firestore.DocumentReference) => {
+        router.push('/confirmation');
+      });
     },
   },
   mutations: {
@@ -58,8 +76,5 @@ export default new Vuex.Store<RoostState>({
     updateInvoicePrice(state, { index, price }) {
       state.invoiceItems[index].price = price;
     },
-  },
-  actions: {
-
   },
 });
