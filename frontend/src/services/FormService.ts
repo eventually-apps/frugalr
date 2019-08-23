@@ -6,6 +6,7 @@ export default class FormService {
     // tslint:disable-next-line: max-line-length
     private emailRegex = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
 
+    // Public parts
     // Let's make sure the Vuex has data. Ideally we should only care for the required data.
     public CheckFormSubmission(): any {
 
@@ -26,6 +27,10 @@ export default class FormService {
         }
 
         return { Success: true, Message: 'Success' };
+    }
+
+    public CheckPaymentSubmission(): any {
+        return { Sucess: true, Message: 'Good' };
     }
 
     // We're gonna purge all the Vuex stored data
@@ -72,5 +77,7 @@ export default class FormService {
 
         return false;
     }
+
+    
 
 }

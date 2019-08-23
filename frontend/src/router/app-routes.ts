@@ -29,4 +29,13 @@ export const appRoutes: IRouter[] = [
         requiresAuth: false,
       },
     },
+    {
+      path: '/payment',
+      name: 'payment',
+      component: () => import('@/views/Payment.vue'),
+      meta: {
+        title: 'Payment',
+        requiresAuth: false,
+      },
+    },
 ];
