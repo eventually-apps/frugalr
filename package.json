@@ -1,35 +1,51 @@
 {
-  "name": "frugalr",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "tsc --project ./functions && rm -rf ./public/* && concurrently --kill-others \"firebase serve\" \"tsc --project ./functions --watch\" \"cd frontend && ./node_modules/.bin/vue-cli-service build --no-clean --dest ../public --watch\" \"sleep 15 && browser-sync start --proxy 'localhost:5000' --files 'public/*'\"",
-    "compile:firebase": "tsc --project ./functions",
-    "clean": "@powershell -NoProfile -ExecutionPolicy Unrestricted -Command Remove-Item -Path .\\public\\* -Recurse",
-    "watch": "tsc --project ./functions && concurrently --kill-others \"firebase serve\" \"tsc --project ./functions --watch\"",
-    "serve-vue": "\"cd frontend ./node_modules/.bin/vue-cli-service build --no-clean --dest ../public --watch\" \"sleep 15 && browser-sync start --proxy 'localhost:5000' --files 'public/*'\""
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/poop-monkeys/frugalr.git"
-  },
-  "keywords": [
-    "frugalr"
-  ],
-  "author": "",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/poop-monkeys/frugalr/issues"
-  },
-  "homepage": "https://github.com/poop-monkeys/frugalr#readme",
-  "devDependencies": {
-    "browser-sync": "^2.26.7",
-    "concurrently": "^4.1.1",
-    "typescript": "^3.5.3"
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "bootstrap": "^4.3.1"
+    "bootstrap": "^4.3.1",
+    "bootstrap-vue": "^2.0.0-rc.27",
+    "core-js": "^2.6.5",
+    "express": "^4.17.1",
+    "firebase": "^6.3.5",
+    "lodash.camelcase": "^4.3.0",
+    "lodash.upperfirst": "^4.3.1",
+    "serve-static": "^1.14.1",
+    "vue": "^2.6.10",
+    "vue-class-component": "^7.0.2",
+    "vue-property-decorator": "^8.1.0",
+    "vue-router": "^3.0.3",
+    "vuedraggable": "^2.23.0",
+    "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "@types/lodash.camelcase": "^4.3.6",
+    "@types/lodash.upperfirst": "^4.3.6",
+    "@vue/cli-plugin-babel": "^3.0.1",
+    "@vue/cli-plugin-typescript": "^3.0.1",
+    "@vue/cli-service": "^3.0.1",
+    "lint-staged": "^8.1.5",
+    "node-sass": "^4.9.0",
+    "sass-loader": "^7.1.0",
+    "typescript": "^3.4.3",
+    "vue-template-compiler": "^2.6.10"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "vue-cli-service lint",
+      "git add"
+    ],
+    "*.vue": [
+      "vue-cli-service lint",
+      "git add"
+    ]
   }
 }
