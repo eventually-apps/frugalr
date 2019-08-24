@@ -8,6 +8,9 @@ dotenv.config({ path: './.env.local' });
 
 let app = express();
 
+// API routes 
+app.use('/api/invoice', require('./src/api-routes/invoice'));
+
 // in production serve static files from the dist folder
 if (process.env.NODE_ENV === 'production') {
     app.use(serveStatic(path.join(__dirname, 'dist')));
