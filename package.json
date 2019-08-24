@@ -5,12 +5,17 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "postinstall": "if test \"$NODE_ENV\" = \"production\" ; then npm run build ; fi ",
+    "start": "node server.js",
+    "dev": "concurrently \"npm run start\" \"npm run serve\"",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.27",
+    "concurrently": "^4.1.2",
     "core-js": "^2.6.5",
+    "dotenv": "^8.1.0",
     "express": "^4.17.1",
     "firebase": "^6.3.5",
     "lodash.camelcase": "^4.3.0",
