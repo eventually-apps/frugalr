@@ -13,10 +13,11 @@ app.use('/api/invoice', require('./src/api-routes/invoice'));
 
 // in production serve static files from the dist folder
 if (process.env.NODE_ENV === 'production') {
-    app.use(serveStatic(path.join(__dirname, 'dist')));
+    // Set static folder
+    app.use(express.static(__dirname + '/dist/'));
 
-    // handle this as a SPA app
-    app.get(/.*/, (req, res) => res.sendFile(__dirname + './dist/index.html'));
+    // Handle SPA
+    app.get(/.*/, (req, res) => res.sendFile(__dirname + '/dist/index.html'));
 }
 
 const port = process.env.NODE_ENV !== 'production' ? 5000 : 80;
