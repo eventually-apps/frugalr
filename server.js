@@ -1,18 +1,16 @@
 const express = require('express');
-const serveStatic = require('serve-static');
-const path = require('path');
-const dotenv = require('dotenv');
-
-// load the .env
-dotenv.config({ path: './.env.local' });
 
 let app = express();
 
 // API routes 
 app.use('/api/invoice', require('./src/api-routes/invoice'));
 
+const currentEnv = process.env.NODE_ENV;
+console.log("Current NODE_ENV is: " + currentEnv);
+
 // in production serve static files from the dist folder
-if (process.env.NODE_ENV === 'production') {
+if (currentEnv === 'production') {
+    console.log("setting the static folder...");
     // Set static folder
     app.use(express.static(__dirname + '/dist/'));
 
@@ -20,5 +18,11 @@ if (process.env.NODE_ENV === 'production') {
     app.get(/.*/, (req, res) => res.sendFile(__dirname + '/dist/index.html'));
 }
 
-const port = process.env.NODE_ENV !== 'production' ? 5000 : 80;
+let port = process.env.PORT;
+console.log("current process port is: " + port);
+if (typeof (port) === 'undefined' || port === null || port === '') {
+    port = 5000;
+}
+
+console.log("will listening on port " + port);
 app.listen(port);
