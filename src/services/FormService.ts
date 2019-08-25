@@ -5,6 +5,7 @@ export default class FormService {
 
     // tslint:disable-next-line: max-line-length
     private emailRegex = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+    private ccNumberRegex = new RegExp(/[0-9]{16,16}/);
 
     // Public parts
     // Let's make sure the Vuex has data. Ideally we should only care for the required data.
@@ -78,6 +79,13 @@ export default class FormService {
         return false;
     }
 
+    // tslint:disable-next-line: max-line-length
+    // Super generic form checking. Use only when we don't care about the content in the form. It's the user's fault if they put in the wrong info.
+    private CheckForm(formValue: string): boolean {
+        if (formValue.length > 0 && formValue !== '') {
+            return true;
+        }
 
-
+        return false;
+    }
 }
