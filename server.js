@@ -1,6 +1,13 @@
 const express = require('express');
+const dotenv = require('dotenv');
 
 let app = express();
+// Load env
+dotenv.config({ path: './.env.local' });
+dotenv.config({ path: './.env.development' });
+
+// middleware
+app.use(express.json());
 
 // API routes 
 app.use('/api/invoice', require('./src/api-routes/invoice'));
@@ -24,5 +31,5 @@ if (typeof (port) === 'undefined' || port === null || port === '') {
     port = 5000;
 }
 
-console.log("will listening on port " + port);
+console.log("will be listening on port " + port);
 app.listen(port);
