@@ -2,28 +2,34 @@ import { Invoice } from '@/models/invoice/Invoice';
 import { invoiceCollection } from '@/firebase/firebase';
 
 export default class InvoiceService {
-    public createInvoice(invoice: Invoice): Promise<firebase.firestore.DocumentReference> {
+    public async createInvoice(invoice: Invoice): Promise<Response> {
         const data = {
-            toEmail: invoice.toEmail,
-            fromEmail: invoice.fromEmail,
-            amount: invoice.invoiceAmount,
-            message: invoice.message
-        };
-        fetch('/api/invoice/', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        });
-
-        return invoiceCollection.add({
             recipientEmail: invoice.toEmail,
             recipientName: invoice.to,
             message: invoice.message,
             invoiceAmount: invoice.invoiceAmount,
             invoiceItems: invoice.items,
+        };
+        const ref = await invoiceCollection.add(data);
+
+        return fetch('/api/invoice/', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                toEmail: data.recipientEmail,
+                fromEmail: invoice.fromEmail,
+                message: data.message,
+                id: ref.id,
+            }),
         });
+    }
+
+    public getInvoice(invoiceId: string) {
+        const docRef = invoiceCollection.doc(invoiceId);
+
+        return docRef.get();
     }
 }

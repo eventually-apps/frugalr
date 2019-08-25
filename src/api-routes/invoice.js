@@ -16,12 +16,13 @@ router.post('/', async (req, res) => {
     console.log('** Incoming POST Request to /api/invoice/ **')
     const body = req.body;
     const url = process.env.URL;
+    const paymentUrl = `${url}/payment/${body.id}`
     const html = `
-    A new invoice for $${body.amount} has been sent to on Frugalr, by <strong>${body.fromEmail}</strong>, with the following message:
+    A new invoice for $${body.amount} has been sent to you on Frugalr, by <strong>${body.fromEmail}</strong>, with the following message:
     <p>
     ${body.message}
     <br>
-    You can fulfill this invoice and submit your payment here: <a href="${url}/payment" target="_blank">${url}/payment</a>
+    You can fulfill this invoice and submit your payment here: <a href="${paymentUrl}" target="_blank">${paymentUrl}</a>
     `
     const msg = {
         to: body.toEmail,

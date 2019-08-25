@@ -39,9 +39,12 @@ export default new Vuex.Store<RootState>({
       const invoice = new Invoice(getters.toFullName, state.recipientEmail,
         state.userEmail, message, state.invoiceItems);
 
-      invoiceService.createInvoice(invoice).then((ref: firebase.firestore.DocumentReference) => {
+      invoiceService.createInvoice(invoice).then(() => {
         router.push('/confirmation');
       });
+    },
+    getInvoice({ }, id) {
+      return invoiceService.getInvoice(id);
     },
   },
   mutations: {

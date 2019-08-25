@@ -1,7 +1,15 @@
 <template>
 <div class="home">
     <div class="text-center payment">
-        <h2><i class="em-svg em-credit_card"/> Payment Information <i class="em-svg em-credit_card"/></h2>
+        <h2>
+            <i class="em-svg em-credit_card"/> Payment Information <i class="em-svg em-credit_card"/>
+        </h2>
+        <h4>
+            Invoice For: {{ invoiceFor }}
+        </h4>
+        <h4>
+            Amount Owed: ${{ invoiceAmount }}
+        </h4>
         <br>
         <div class="form-row">
             <div class="form-group col-md-6">
@@ -53,10 +61,23 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-export default Vue.extend({
+import { Prop, Component, Vue } from 'vue-property-decorator';
+import Store from '../store';
 
-});
+@Component({})
+export default class Payment extends Vue {
+    @Prop() private id!: string;
+
+    private invoiceAmount: number = 0.0;
+    private invoiceFor: string = '';
+
+    private async mounted() {
+        const data = await Store.dispatch('getInvoice', this.id);
+        const invoice = data.data();
+        this.invoiceAmount = invoice.invoiceAmount;
+        this.invoiceFor = invoice.recipientName;
+    }
+}
 </script>
 
 <style lang="scss">
