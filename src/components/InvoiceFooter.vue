@@ -1,7 +1,7 @@
 <template>
 <div class="col footer-total justify-content-between">
     <div class="align-self-end total">
-        TOTAL: {{totalAmount}}
+        TOTAL: ${{totalAmount}}
     </div>
 </div>
 </template>
@@ -12,8 +12,8 @@ import Store from '../store';
 
 @Component
 export default class InvoiceFooter extends Vue {
-    private get totalAmount(): number {
-        return Store.getters.totalPrice;
+    private get totalAmount(): string {
+        return Store.getters.totalPrice.toFixed(2);
     }
 }
 </script>
