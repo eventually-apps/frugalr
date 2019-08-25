@@ -1,25 +1,26 @@
 import Store from '../store';
-
+import { PaymentDetails } from '@/models/PaymentDetails';
+import CreditCardService from './CreditCardService';
 
 export default class FormService {
 
+    private creditService = new CreditCardService();
     // tslint:disable-next-line: max-line-length
     private emailRegex = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-    private ccNumberRegex = new RegExp(/[0-9]{16,16}/);
 
     // Public parts
-    // Let's make sure the Vuex has data. Ideally we should only care for the required data.
+    // This is to validate the Invoice creation. We should only care about the Vuex data here.
     public CheckFormSubmission(): any {
 
-        if (!this.ValidatePersonName()) {
+        if (!this.ValidateName(Store.state.toFirstName, Store.state.toLastName)) {
             return { Success: false, Message: 'Please fill out the first and last name.' };
         }
 
-        if (!this.ValidateRecipEmail()) {
+        if (!this.ValidateEmail(Store.state.recipientEmail)) {
             return { Success: false, Message: 'Please make sure the recipient email address is valid.' };
         }
 
-        if (!this.ValidateUserEmail()) {
+        if (!this.ValidateEmail(Store.state.userEmail)) {
             return { Success: false, Message: 'Please make sure the your email address is valid.' };
         }
 
@@ -30,7 +31,25 @@ export default class FormService {
         return { Success: true, Message: 'Success' };
     }
 
-    public CheckPaymentSubmission(): any {
+    // Since payment is never going to be stored we will not check against the Vuex data
+    public CheckPaymentSubmission(details: PaymentDetails): any {
+
+        if (!this.ValidateName(details.firstName, details.lastName)) {
+            return { Success: false, Message: ' Please make sure first and last name are filled out.'};
+        }
+
+        if (!this.ValidateTextForm(details.address1)) {
+            return { Success: false, Message: 'Please make sure the address is valid.'};
+        }
+
+        if (!this.creditService.ValidateCCNumber(details.ccNumber)) {
+            return { Success: false, Message: 'Please make sure the credit card number is valid' };
+        }
+
+        if (!this.creditService.ValidateCVC(details.ccNumber)) {
+            return { Success: false, Message: 'Please make sure the CVC number has been entered correctly' };
+        }
+
         return { Sucess: true, Message: 'Good' };
     }
 
@@ -39,26 +58,18 @@ export default class FormService {
         Store.commit('resetEverything');
     }
 
-    // Private Parts
-    private ValidatePersonName(): boolean {
-        if (Store.state.toFirstName !== '' && Store.state.toFirstName.length > 0 &&
-            Store.state.toLastName !== '' && Store.state.toLastName.length > 0) {
+    // Private stuff, behind closed doors, probably micro transaction based.
+    private ValidateName(firstName: string, lastName: string): boolean {
+        if (firstName !== '' && firstName.length > 0 &&
+            lastName !== '' && lastName.length > 0) {
                 return true;
             }
 
         return false;
     }
 
-    private ValidateUserEmail(): boolean {
-        if (this.emailRegex.test(Store.state.userEmail)) {
-            return true;
-        }
-
-        return false;
-    }
-
-    private ValidateRecipEmail(): boolean {
-        if (this.emailRegex.test(Store.state.recipientEmail)) {
+    private ValidateEmail(email: string): boolean {
+        if (this.emailRegex.test(email)) {
             return true;
         }
 
@@ -79,9 +90,7 @@ export default class FormService {
         return false;
     }
 
-    // tslint:disable-next-line: max-line-length
-    // Super generic form checking. Use only when we don't care about the content in the form. It's the user's fault if they put in the wrong info.
-    private CheckForm(formValue: string): boolean {
+    private ValidateTextForm(formValue: string): boolean {
         if (formValue.length > 0 && formValue !== '') {
             return true;
         }

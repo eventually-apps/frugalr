@@ -24,11 +24,11 @@
         <div class="form-row">
             <div class="form-group col-md-8">
                 <label for="ccnum">Card Number</label>
-                <input type="text" class="form-control" placeholder="ex. 1234 1234 1234 1234">
+                <input type="text" class="form-control" maxlength="16" placeholder="ex. 1234 1234 1234 1234">
             </div>
             <div class="form-group col-md-4">
                 <label for="cvc">CVC Number</label>
-                <input type="text" class="form-control" placeholder="ex. 123">
+                <input type="number" class="form-control" maxLength="3" placeholder="ex. 123">
             </div>
         </div>
         <div class="form-group">
@@ -50,11 +50,11 @@
             </div>
             <div class="form-group col-md-2">
                 <label for="inputZip">Zip</label>
-                <input type="text" class="form-control">
+                <input type="number" maxLength="5" class="form-control">
             </div>
         </div>
         <div class="form-group col-md-12">
-            <button type="button" class="btn btn-outline-success btn-lg">Submit</button>
+            <button type="button" class="btn btn-outline-success btn-lg" @click="submitPayment">Submit</button>
         </div>
     </div>
 </div>
@@ -63,6 +63,9 @@
 <script lang="ts">
 import { Prop, Component, Vue } from 'vue-property-decorator';
 import Store from '../store';
+import FormService from '../services/FormService';
+
+const formService = new FormService();
 
 @Component({})
 export default class Payment extends Vue {
