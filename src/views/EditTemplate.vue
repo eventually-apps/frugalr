@@ -58,12 +58,11 @@ const formService = new FormService();
     },
 })
 export default class EditTemplate extends Vue {
-    @Prop() public modalBody!: string;
-    @Prop() public modalTitle!: string;
-    @Prop() public dangerMsg!: string;
-    @Prop() public successMsg!: string;
-    @Prop() public modalType!: string;
-
+    public modalBody: string = '';
+    public modalTitle: string = '';
+    public dangerMsg: string = '';
+    public successMsg: string = '';
+    public modalType: string = '';
     public isModalVisible = false;
     public message: string = '';
 

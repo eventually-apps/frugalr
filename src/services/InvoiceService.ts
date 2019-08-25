@@ -22,6 +22,7 @@ export default class InvoiceService {
                 toEmail: data.recipientEmail,
                 fromEmail: invoice.fromEmail,
                 message: data.message,
+                amount: data.invoiceAmount,
                 id: ref.id,
             }),
         });
