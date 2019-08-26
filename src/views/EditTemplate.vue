@@ -100,13 +100,6 @@ export default class EditTemplate extends Vue {
 
 <style lang="scss">
 
-.aaa {
-    background-color: rgb(99, 99, 99);
-    min-width: inherit;
-    min-height: 10%;
-    box-shadow: inset 0 0 5rem rgba(0, 0, 0, .3);
-}
-
 .col{
     margin-top: 5px;
 }
