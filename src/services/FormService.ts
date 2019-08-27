@@ -78,7 +78,7 @@ export default class FormService {
 
     private ValidateLineItem(): boolean {
         for (const item of Store.state.invoiceItems) {
-            if (Math.floor(item.price) > Math.floor(0.00)) {
+            if (Math.floor(item.price) > Math.floor(0.00) && Math.abs(item.price)) {
                 if (item.item.length > 0 || item.item !== '') {
                     return true;
                 }

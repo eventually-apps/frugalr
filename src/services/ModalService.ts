@@ -1,6 +1,7 @@
 export enum ModalType {
     Cancel = 'cancel',
     Confirm = 'confirm',
+    Payment = 'payment',
 }
 
 export default class ModalService {
@@ -15,6 +16,9 @@ export default class ModalService {
             }
             case ModalType.Cancel: {
                 return 'Throw it all away';
+            }
+            case ModalType.Payment: {
+                return 'Confirm Payment Details';
             }
             default: {
                 return 'Title';
@@ -31,6 +35,9 @@ export default class ModalService {
             case ModalType.Cancel: {
                 return 'Are you really sure you wanna cancel? All your changes will not be saved.';
             }
+            case ModalType.Payment: {
+                return 'Please make sure all your payment information is correct.';
+            }
             default: {
                 return 'I have nothing to tell you';
             }
@@ -45,6 +52,9 @@ export default class ModalService {
             }
             case ModalType.Cancel: {
                 return { success: 'Start Over', danger: 'I\'m not done' };
+            }
+            case ModalType.Payment: {
+                return { success: 'Send Payment', danger: 'Cancel' };
             }
             default: {
                 return { success: 'Confirm', danger: 'Cancel'};

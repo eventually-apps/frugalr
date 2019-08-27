@@ -85,7 +85,6 @@ export default class EditTemplate extends Vue {
     }
 
     public submitModal(type: string) {
-        console.log(type);
         if (type === ModalType.Cancel) {
             this.$router.push('/');
         }

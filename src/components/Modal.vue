@@ -25,16 +25,18 @@
 import { Vue, Component, Prop } from 'vue-property-decorator';
 import FormService from '../services/FormService';
 import { ModalType } from '../services/ModalService';
+import { PaymentDetails } from '../models/PaymentDetails';
 
 const formService = new FormService();
 
 @Component
 export default class Modal extends Vue {
-  @Prop({default: 'hello'}) public titlemsg!: string;
-  @Prop({default: 'no'}) public msg!: string;
+  @Prop({default: 'Missing Title'}) public titlemsg!: string;
+  @Prop({default: 'Missing Body'}) public msg!: string;
   @Prop() public successMsg!: string;
   @Prop() public dangerMsg!: string;
   @Prop() public modalType!: string;
+  @Prop({default: new PaymentDetails()}) public paymentDetails!: PaymentDetails;
 
   private isVisible = true;
 
@@ -48,6 +50,18 @@ export default class Modal extends Vue {
 
     if (checkForm === true || this.modalType === ModalType.Cancel) {
       this.$emit('submitModal', this.modalType);
+    } else {
+      this.titlemsg = 'ERROR';
+      this.msg = validationResponse;
+    }
+  }
+
+  public submitPayment(details: PaymentDetails): void {
+    const checkForm = formService.CheckPaymentSubmission(details).Success;
+    const validationResponse = formService.CheckPaymentSubmission(details).Message;
+
+    if (checkForm === true) {
+      this.$emit('submitModal');
     } else {
       this.titlemsg = 'ERROR';
       this.msg = validationResponse;
