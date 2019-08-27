@@ -5,8 +5,7 @@ export default class PdfService {
     public PDFDocument = require('pdfkit');
     public fs = require('fs');
 
-    public GeneratePdf(invoice: Invoice): any {
-        const doc = new this.PDFDocument({size: 'A4', margin: 50});
+    public GeneratePdf(doc: any, invoice: Invoice): any {
 
         this.GenerateHeader(doc);
         this.GenerateCustomerInformation(doc, invoice);
