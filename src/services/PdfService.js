@@ -31,16 +31,15 @@ function generateHeader(doc, invoice) {
     .fontSize(10)
     .text(`Invoice Date: ${formatDate(new Date())}`, 200, 65, { align: 'right' })
     .text(`Customer Name: ${invoice.name}`, 200, 80, { align: 'right' })
-    .text(`From: ${invoice.fromEmail}`, 200, 105, { align: 'right' })
     .moveDown();
 }
 
 function generateFooter(doc) {
   doc
     .fontSize(10)
-    .text('Don\'t forget to pay your friend!', 50, 780, { align: 'center', width: 500 })
+    .text('Don\'t forget to pay your friend!', 50, 760, { align: 'center', width: 500 })
     .fontSize(8)
-    .text('Frugalr, LCC. 2019', { align: 'center', width: 500 });
+    .text('Frugalr, LCC. 2019', 50, 780, { align: 'center', width: 500 });
 }
 
 function generateInvoiceTable(doc, invoice) {
@@ -59,7 +58,7 @@ function generateInvoiceTable(doc, invoice) {
     generateHr(doc, position + 20);
   }
 
-  doc.text(`Balance Due: ${invoice.invoiceAmount}`, 0, position, { align: 'right' });
+  doc.text(`Balance Due: ${invoice.invoiceAmount}`, 0, position + 20, { align: 'right' });
 }
 
 function generateTableRow(doc, y, item, price) {
