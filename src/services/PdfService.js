@@ -6,7 +6,7 @@ function generatePdf(invoice) {
   let base64String = '';
   console.log('**Generating pdf...**');
 
-  generateHeader(doc);
+  generateHeader(doc, invoice);
   generateInvoiceTable(doc, invoice);
   generateFooter(doc);
 
@@ -31,7 +31,7 @@ function generateHeader(doc, invoice) {
     .fontSize(10)
     .text(`Invoice Date: ${formatDate(new Date())}`, 200, 80, { align: 'right' })
     .text(`Customer Name: ${invoice.name}`, 200, 80, { align: 'right' })
-    .text(`From: ${invoice.fromEmail}`, 200, 80, { align: 'right'})
+    .text(`From: ${invoice.fromEmail}`, 200, 80, { align: 'right' })
     .moveDown();
 }
 
@@ -51,10 +51,10 @@ function generateInvoiceTable(doc, invoice) {
   generateTableRow(doc, invoiceTableTop, 'Description', 'Cost');
   generateHr(doc, invoiceTableTop + 20);
   doc.font('Helvetica');
-
+  let position = 0;
   for (i = 0; i < invoice.items.length; i++) {
     const item = invoice.items[i];
-    const position = invoiceTableTop + (i + 1) * 30;
+    position = invoiceTableTop + (i + 1) * 30;
     generateTableRow(doc, position, item.item, item.price);
     generateHr(doc, position + 20);
   }
