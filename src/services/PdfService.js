@@ -58,7 +58,7 @@ function generateInvoiceTable(doc, invoice) {
     generateHr(doc, position + 20);
   }
 
-  doc.text(`Balance Due: ${invoice.invoiceAmount}`, 0, position + 20, { align: 'right' });
+  doc.text(`Balance Due: ${invoice.invoiceAmount}`, 0, position + 40, { align: 'right' });
 }
 
 function generateTableRow(doc, y, item, price) {
