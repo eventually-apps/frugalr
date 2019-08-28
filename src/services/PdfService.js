@@ -29,9 +29,9 @@ function generateHeader(doc, invoice) {
     .fontSize(20)
     .text('Fruglar, LLC.', 95, 57)
     .fontSize(10)
-    .text(`Invoice Date: ${formatDate(new Date())}`, 200, 80, { align: 'right' })
+    .text(`Invoice Date: ${formatDate(new Date())}`, 200, 65, { align: 'right' })
     .text(`Customer Name: ${invoice.name}`, 200, 80, { align: 'right' })
-    .text(`From: ${invoice.fromEmail}`, 200, 80, { align: 'right' })
+    .text(`From: ${invoice.fromEmail}`, 200, 105, { align: 'right' })
     .moveDown();
 }
 
