@@ -1,16 +1,10 @@
 const express = require('express');
 const sgMail = require('@sendgrid/mail');
+const { generatePdf } = require("../services/PdfService");
+
 const router = express.Router();
 
-console.log("using sendgrid key: " + process.env.SENDGRID_API_KEY);
-console.log(process.env.URL);
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-
-router.get('/', (req, res) => {
-    console.log('** Incoming GET Request to /api/invoice/ **')
-    console.log(req);
-    console.log(res);
-})
 
 router.post('/', async (req, res) => {
     console.log('** Incoming POST Request to /api/invoice/ **')
@@ -24,11 +18,25 @@ router.post('/', async (req, res) => {
     <br>
     You can fulfill this invoice and submit your payment here: <a href="${paymentUrl}" target="_blank">${paymentUrl}</a>
     `
+    const pdf = await generatePdf({
+        invoiceAmount: body.amount,
+        items: body.items,
+        name: body.name
+    });
+
     const msg = {
         to: body.toEmail,
         from: 'invoice@frugalr.com',
         subject: 'New Invoice on Frugalr',
-        html: html
+        html: html,
+        attachments: [
+            {
+                content: pdf,
+                filename: 'invoice.pdf',
+                type: 'application/pdf',
+                disposition: 'attachment'
+            }
+        ]
     };
 
     sgMail.send(msg);
