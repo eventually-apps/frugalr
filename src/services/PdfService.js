@@ -7,7 +7,6 @@ function generatePdf(invoice) {
   console.log('**Generating pdf...**');
 
   generateHeader(doc);
-  generateCustomerInformation(doc, invoice);
   generateInvoiceTable(doc, invoice);
   generateFooter(doc);
 
@@ -25,35 +24,23 @@ function generatePdf(invoice) {
   });
 }
 
-function generateHeader(doc) {
+function generateHeader(doc, invoice) {
   doc
     .fontSize(20)
     .text('Fruglar, LLC.', 95, 57)
     .fontSize(10)
-    .text('123 Main Street', 200, 65, { align: 'right' })
-    .text('New York, NY, 10025', 200, 80, { align: 'right' })
-    .moveDown();
-}
-
-function generateCustomerInformation(doc, invoice) {
-  doc
-    // .text(`Invoice Number: ${invoice.}`, 50, 200)
-    .text(`Invoice Date: ${formatDate(new Date())}`, 50, 215)
-    .text(`Balance Due: ${invoice.invoiceAmount}`, 50, 130)
-
-    .text(`Customer Name: ${invoice.name}`, 300, 200)
+    .text(`Invoice Date: ${formatDate(new Date())}`, 200, 80, { align: 'right' })
+    .text(`Customer Name: ${invoice.name}`, 200, 80, { align: 'right' })
+    .text(`From: ${invoice.fromEmail}`, 200, 80, { align: 'right'})
     .moveDown();
 }
 
 function generateFooter(doc) {
   doc
     .fontSize(10)
-    .text('Don\'t forget to pay your friend!', 50, 780,
-      {
-        align: 'center',
-        width: 500,
-      },
-    );
+    .text('Don\'t forget to pay your friend!', 50, 780, { align: 'center', width: 500 })
+    .fontSize(8)
+    .text('Frugalr, LCC. 2019', { align: 'center', width: 500 });
 }
 
 function generateInvoiceTable(doc, invoice) {
@@ -71,15 +58,14 @@ function generateInvoiceTable(doc, invoice) {
     generateTableRow(doc, position, item.item, item.price);
     generateHr(doc, position + 20);
   }
+
+  doc.text(`Balance Due: ${invoice.invoiceAmount}`, 0, position, { align: 'right' });
 }
 
 function generateTableRow(doc, y, item, price) {
   doc
     .fontSize(10)
     .text(item, 50, y)
-    //   .text(c2, 150, y)
-    //   .text(c3, 280, y, { width: 90, align: 'right' })
-    //   .text(c4, 370, y, { width: 90, align: 'right' })
     .text(price, 0, y, { align: 'right' });
 }
 
