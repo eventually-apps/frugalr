@@ -5,6 +5,8 @@ So now when your friend owes you money for that eggplant custard pizza you have 
 
 Oh did I mention they will also get a nice invoice sent to them? as a PDF?
 
+![Frugalr Image](https://raw.githubusercontent.com/poop-monkeys/frugalr/master/frugalr%20snippet.PNG)
+
 ## Demo
 Why not checkout our demo? I mean even a hackathon application needs a staging and production site!
 
